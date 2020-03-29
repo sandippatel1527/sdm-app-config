@@ -1,5 +1,10 @@
 server:
   port: 8084
+management:
+ endpoints:
+   web:
+     exposure:
+       include: '*'
 
 logging:
   level:
@@ -13,6 +18,11 @@ logging:
 pattern:
   console: "%d %-5level %logger : %msg%n"
 spring:
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: guest
+    password: guest
   datasource:
     url: jdbc:mysql://${DB_HOST:localhost}:${DB_PRT:3306}/${DB_NAME:holdRelease}
     username: ${DB_USER:root}
