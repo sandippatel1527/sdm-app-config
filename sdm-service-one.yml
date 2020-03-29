@@ -1,0 +1,69 @@
+server:
+  port: 8083
+
+logging:
+  level:
+    ROOT: ERROR
+    com.bootcamp: DEBUG
+    org:
+      springframework: DEBUG
+      hibernate:
+        type.descriptor.sql: trace
+        sql: debug
+pattern:
+  console: "%d %-5level %logger : %msg%n"
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    jedis:
+      pool:
+        max-active: 8
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PRT:3306}/${DB_NAME:holdRelease}
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:passw0rd}
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/holdRelease
+#    password: passw0rd
+#    username: root
+#    jpa:
+#      hibernate:
+#        ddl-auto: update
+#      properties:
+#        hibernate:
+#          format_sql: true
+#      show-sql: true
+
+
+service:
+  archive:
+    wait_time_seconds:  300
+  return:
+    wait_time_seconds:  1800
+
+  rabbitmq:
+    incoming:
+      destination: "transaction_sdm"
+    outgoing:
+      destination: "transaction_sdm_staging"
+      routingKey: "transaction_sdm_staging"
+      exchange: "transaction_exchange_staging"
+  transaction:
+    maxNormalAmount: 2500.00
+  cron:
+    time: "0/5 * * * * *"
+
