@@ -4,6 +4,11 @@ server:
 generation:
   cron:
     time: "0/5 * * * * *"
+management:
+ endpoints:
+   web:
+     exposure:
+       include: '*'
 
 logging:
   level:
@@ -22,7 +27,7 @@ ibm:
   mq:
     queueManager: QM1
     channel: DEV.ADMIN.SVRCONN
-    connName: localhost(1414)
+    connName: ${IBM_HOST:localhost}(1414)
     user: admin
     password: passw0rd
   queue:
@@ -30,8 +35,13 @@ ibm:
 
 spring:
   redis:
-    host: localhost
-    port: 6379
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
     jedis:
       pool:
         max-active: 8
+  rabbitmq:
+   host: ${RABBITMQ_HOST:localhost}
+   port: ${RABBITMQ_PORT:5672}
+   username: guest
+   password: guest
