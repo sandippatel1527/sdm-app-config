@@ -18,17 +18,17 @@ ibm:
   mq:
     queueManager: QM1
     channel: DEV.ADMIN.SVRCONN
-    host: localhost
+    host: ${IBM_HOST:localhost}
     port: 1414
     user: admin
     password: passw0rd
 
 spring:
   rabbitmq:
-    host: localhost
-    port: 5672
-    username: sdm_app
-    password: guest
+   host: ${RABBITMQ_HOST:localhost}
+   port: ${RABBITMQ_PORT:5672}
+   username: guest
+   password: guest
 
 relay:
   rabbitmq:
