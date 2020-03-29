@@ -1,0 +1,37 @@
+server:
+  port: 8081
+
+generation:
+  cron:
+    time: "0/5 * * * * *"
+
+logging:
+  level:
+    ROOT: ERROR
+    com.bootcamp: DEBUG
+    net.javacrumbs.shedlock:  DEBUG
+    org:
+      springframework: DEBUG
+      hibernate:
+        type.descriptor.sql: trace
+        SQL: DEBUG
+pattern:
+  console: "%d %-5level %logger : %msg%n"
+
+ibm:
+  mq:
+    queueManager: QM1
+    channel: DEV.ADMIN.SVRCONN
+    connName: localhost(1414)
+    user: admin
+    password: passw0rd
+  queue:
+    destination: "Transaction_Sdm"
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    jedis:
+      pool:
+        max-active: 8
