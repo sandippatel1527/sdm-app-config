@@ -1,0 +1,43 @@
+server:
+  port: 8082
+
+logging:
+  level:
+    ROOT: ERROR
+    com.bootcamp: DEBUG
+    net.javacrumbs.shedlock:  DEBUG
+    org:
+      springframework: DEBUG
+      hibernate:
+        type.descriptor.sql: trace
+        SQL: DEBUG
+pattern:
+  console: "%d %-5level %logger : %msg%n"
+
+ibm:
+  mq:
+    queueManager: QM1
+    channel: DEV.ADMIN.SVRCONN
+    host: localhost
+    port: 1414
+    user: admin
+    password: passw0rd
+
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: sdm_app
+    password: guest
+
+relay:
+  rabbitmq:
+    destination: "transaction_sdm"
+    routingKey: "transaction_sdm"
+    exchange: "transaction_exchange"
+    vhost: "%2f"
+    port: 15672
+  ibmmq:
+    destination: "Transaction_Sdm"
+    dlq: "Transaction_Sdm_Dlq"
+
