@@ -1,0 +1,27 @@
+server:
+  port: 8084
+
+logging:
+  level:
+    ROOT: ERROR
+    com.bootcamp: DEBUG
+    org:
+      springframework: DEBUG
+      hibernate:
+        type.descriptor.sql: trace
+        sql: debug
+pattern:
+  console: "%d %-5level %logger : %msg%n"
+spring:
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PRT:3306}/${DB_NAME:holdRelease}
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:passw0rd}
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
