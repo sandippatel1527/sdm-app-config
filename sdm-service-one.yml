@@ -1,5 +1,10 @@
 server:
   port: 8083
+management:
+ endpoints:
+   web:
+     exposure:
+       include: '*'
 
 logging:
   level:
@@ -14,16 +19,16 @@ pattern:
   console: "%d %-5level %logger : %msg%n"
 spring:
   redis:
-    host: localhost
-    port: 6379
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
     jedis:
       pool:
         max-active: 8
   rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+   host: ${RABBITMQ_HOST:localhost}
+   port: ${RABBITMQ_PORT:5672}
+   username: guest
+   password: guest
   datasource:
     url: jdbc:mysql://${DB_HOST:localhost}:${DB_PRT:3306}/${DB_NAME:holdRelease}
     username: ${DB_USER:root}
@@ -47,7 +52,6 @@ spring:
 #        hibernate:
 #          format_sql: true
 #      show-sql: true
-
 
 service:
   archive:
